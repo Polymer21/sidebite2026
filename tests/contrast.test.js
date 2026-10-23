@@ -257,6 +257,22 @@ test("the hero keeps the specified size, timing, and dot treatment", () => {
   assert.match(hero, /prefers-reduced-motion|var\(--hero-fade\)/);
 });
 
+test("chips, disclosures, and the RSVP error state use palette tokens", () => {
+  const components = readFileSync(new URL("../src/styles/components.css", import.meta.url), "utf8");
+  assert.match(components, /\.choice-chip:hover\s*\{[^}]*var\(--color-text-secondary\)/);
+  assert.match(components, /\.choice-chip:active\s*\{[^}]*var\(--color-bg-muted\)/);
+  assert.match(components, /\.choice-chip:has\(:disabled\)[\s\S]*var\(--color-bg-disabled\)/);
+  assert.match(components, /\.choice-chip:has\(:disabled\)[\s\S]*var\(--color-text-disabled\)/);
+  assert.match(components, /\.choice-chip:has\(:disabled\)[\s\S]*var\(--color-border-disabled\)/);
+  assert.match(components, /\.faq-item__trigger:hover\s*\{[^}]*var\(--color-accent-subtle\)/);
+  assert.match(components, /\.faq-item__trigger:active\s*\{[^}]*var\(--color-bg-muted\)/);
+  assert.match(components, /\.schedule-row:has\(\.schedule-row__trigger:hover\)\s*\{[^}]*var\(--color-accent-subtle\)/);
+  assert.match(components, /\.schedule-row:has\(\.schedule-row__trigger:active\)\s*\{[^}]*var\(--color-bg-muted\)/);
+  assert.match(components, /\.schedule-row:has\(\[aria-expanded="true"\]\)\s*\{[^}]*var\(--color-accent\)/);
+  assert.match(components, /\.rsvp-state--error\s*\{[^}]*var\(--color-border-error\)/);
+  assert.match(components, /\.rsvp-state--error h3,\s*\.rsvp-state--error p\s*\{[^}]*var\(--color-text-error\)/);
+});
+
 test("at 390px the logo, hero dots, and footer links have a 44px target", () => {
   const heroMobile = hero.slice(hero.indexOf("@media (max-width: 759px)"));
   assert.match(heroMobile, /\.logo\s*\{[^}]*min-height:\s*44px/);

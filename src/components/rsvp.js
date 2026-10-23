@@ -4,15 +4,17 @@ import { renderPillArrowButton } from "./pill-arrow-button.js";
 import { renderTextarea } from "./textarea.js";
 import { escapeHtml } from "../render/escape.js";
 
-const STATE_ORDER = ["submitting", "full", "closed"];
+const STATE_ORDER = ["submitting", "full", "closed", "error"];
 
-function field({ id, name, label, type, autocomplete, maxlength, disabled }) {
+function field({ id, name, label, type, autocomplete, maxlength, disabled, error = "" }) {
   const complete = autocomplete ? ` autocomplete="${escapeHtml(autocomplete)}"` : "";
   const dis = disabled ? " disabled" : "";
+  const invalid = error ? ` aria-invalid="true"` : "";
+  const hidden = error ? "" : " hidden";
   return `<div class="field">
     <label for="${id}">${escapeHtml(label)}</label>
-    <input id="${id}" name="${escapeHtml(name)}" type="${escapeHtml(type)}"${complete} maxlength="${maxlength}" required aria-describedby="${id}-error"${dis} />
-    <p id="${id}-error" class="field__error" hidden></p>
+    <input id="${id}" name="${escapeHtml(name)}" type="${escapeHtml(type)}"${complete} maxlength="${maxlength}" required aria-describedby="${id}-error"${dis}${invalid} />
+    <p id="${id}-error" class="field__error"${hidden}>${escapeHtml(error)}</p>
   </div>`;
 }
 
@@ -25,9 +27,13 @@ function renderStateCard(id, copy) {
   </li>`;
 }
 
-function renderForm(section, disabled) {
+function renderForm(section, disabled, fieldErrors = {}) {
+  const banner = fieldErrors.summary
+    ? `<p class="rsvp__error" role="alert">${escapeHtml(fieldErrors.summary)}</p>`
+    : "";
   return `<form class="rsvp__form" action="#rsvp" method="post" novalidate>
     <p class="rsvp__status" data-rsvp-status hidden>${escapeHtml(section.states.submitting.title)}</p>
+    ${banner}
     ${field({
       id: "rsvp-name",
       name: "name",
@@ -36,6 +42,7 @@ function renderForm(section, disabled) {
       autocomplete: "name",
       maxlength: 80,
       disabled,
+      error: fieldErrors.name || "",
     })}
     ${field({
       id: "rsvp-email",
@@ -63,6 +70,7 @@ function renderForm(section, disabled) {
       legend: section.eventLabel,
       options: section.choices,
       disabled,
+      error: fieldErrors.event || "",
     })}
     ${renderTextarea({
       id: "rsvp-note",
@@ -88,9 +96,17 @@ export function renderRsvp(section) {
   const state = STATE_ORDER.includes(section.state) || section.state === "ready" ? section.state : "ready";
   const blocked = state === "full" || state === "closed";
   const busy = state === "submitting" ? ` aria-busy="true"` : "";
+  const errorClass = state === "error" ? " is-error" : "";
+  const fieldErrors = state === "error"
+    ? {
+        summary: section.states.error.body,
+        name: section.states.error.fields?.name || "",
+        event: section.states.error.fields?.event || "",
+      }
+    : {};
   const live = blocked
     ? renderBlocked(state, section.states[state])
-    : `${renderForm(section, state === "submitting")}
+    : `${renderForm(section, state === "submitting", fieldErrors)}
         <div class="rsvp__success" role="status" aria-hidden="true">
           <h3 tabindex="-1" data-rsvp-success-title>${escapeHtml(section.successTitle)}</h3>
           <p data-rsvp-success-copy></p>
@@ -112,7 +128,7 @@ export function renderRsvp(section) {
         <h2 id="rsvp-heading">${escapeHtml(section.title)}</h2>
         <p>${escapeHtml(section.intro)}</p>
       </div>
-      <div class="rsvp__panel" data-rsvp data-rsvp-state="${escapeHtml(state)}"${busy}>
+      <div class="rsvp__panel${errorClass}" data-rsvp data-rsvp-state="${escapeHtml(state)}"${busy}>
         ${live}
       </div>
     </div>

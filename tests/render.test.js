@@ -43,6 +43,10 @@ test("rendered markup includes the shared regions and placeholder copy", () => {
   assert.match(page.body, /data-rsvp-state="submitting"/);
   assert.match(page.body, /data-rsvp-state="full"/);
   assert.match(page.body, /data-rsvp-state="closed"/);
+  assert.match(page.body, /data-rsvp-state="error"/);
+  assert.match(page.body, /aria-controls="schedule-date"/);
+  assert.match(page.body, /class="schedule-row__trigger"/);
+  assert.match(page.body, /Sold out/);
   assert.match(page.body, /data-autoplay="5000"/);
   assert.match(page.body, /data-fade="600"/);
   assert.match(page.body, /--hero-fade: 600ms/);
@@ -64,6 +68,18 @@ test("full and closed RSVP states replace the form from config", () => {
     assert.doesNotMatch(page.body, /id="rsvp-name"/);
     assert.match(page.body, new RegExp(content.rsvp.states[state].title));
   }
+});
+
+test("the error RSVP state keeps the form and uses the config copy", () => {
+  const content = structuredClone(marketing);
+  content.rsvp.state = "error";
+  const page = renderPage(content);
+  assert.match(page.body, /data-rsvp-state="error"/);
+  assert.match(page.body, /id="rsvp-name"/);
+  assert.match(page.body, /aria-invalid="true"/);
+  assert.match(page.body, /Enter your name\./);
+  assert.match(page.body, /Pick one option\./);
+  assert.match(page.body, new RegExp(content.rsvp.states.error.title));
 });
 
 test("content is escaped before it reaches the page", () => {

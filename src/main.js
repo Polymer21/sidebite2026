@@ -2,6 +2,7 @@ import { initFaq } from "./behaviors/faq.js";
 import { initNav } from "./behaviors/nav.js";
 import { initPalette } from "./behaviors/palette.js";
 import { initRsvp } from "./behaviors/rsvp.js";
+import { initSchedule } from "./behaviors/schedule.js";
 import { initSlider } from "./behaviors/slider.js";
 import { initSteppers } from "./behaviors/stepper.js";
 
@@ -12,3 +13,4 @@ initPalette(document);
 initSteppers(document);
 initRsvp(document);
 initFaq(document);
+initSchedule(document);

@@ -72,13 +72,13 @@ Font families and weights live in `src/styles/themes.css`. The files are self-ho
 
 ## Shared blocks
 
-The page is built from TopBar, PillArrowButton, ScheduleRow, FAQItem, Textarea, ChoiceChip, and GuestCountStepper. The stepper replaces the free-text guest field. It keeps a minimum and maximum from the content config and moves with the arrow keys, Home, and End. FAQ items are buttons with `aria-expanded` and `aria-controls`.
+The page is built from TopBar, PillArrowButton, ScheduleRow, FAQItem, Textarea, ChoiceChip, and GuestCountStepper. The stepper replaces the free-text guest field. It keeps a minimum and maximum from the content config and moves with the arrow keys, Home, and End. Schedule rows and FAQ items are buttons with `aria-expanded` and `aria-controls`. A schedule row also moves with the arrow keys, Home, and End. Choice chips and those triggers use the palette hover, pressed, and disabled tokens.
 
 ## RSVP demo
 
 The form checks name, email, event type, an optional note, and guest count in the browser. Errors are tied to the fields. A valid submit passes through Submitting, then replaces the form with a success message in the same card. Nothing is sent to a server.
 
-`rsvp.state` in the content config is `ready`, `submitting`, `full`, or `closed`. Full and Closed replace the form. The marketing page stays on `ready` and also renders Submitting, Full, and Closed from `rsvp.states` so those states can be reviewed on the page.
+`rsvp.state` in the content config is `ready`, `submitting`, `full`, `closed`, or `error`. Full and Closed replace the form. Error keeps the form and shows the config messages with the error color and border. The marketing page stays on `ready` and also renders Submitting, Full, Closed, and Error from `rsvp.states`.
 
 ## Deploy to GitHub Pages
 

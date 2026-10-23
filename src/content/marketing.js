@@ -60,11 +60,29 @@ export const marketing = {
     id: "schedule",
     eyebrow: "Placeholder copy",
     title: "Schedule",
-    intro: "Placeholder: the facts row is shared, so the next event can swap the date, time, and place.",
+    intro: "Placeholder: each row opens for the detail. It stays closed until someone opens it.",
     rows: [
-      { label: "Date", value: "Saturday, October 31" },
-      { label: "Time", value: "7:00 p.m." },
-      { label: "Place", value: "Placeholder venue" },
+      {
+        id: "schedule-date",
+        number: "01",
+        time: "Saturday, October 31",
+        item: "Date",
+        detail: "Placeholder: the gathering starts in the evening.",
+      },
+      {
+        id: "schedule-time",
+        number: "02",
+        time: "7:00 p.m.",
+        item: "Time",
+        detail: "Placeholder: doors open half an hour before.",
+      },
+      {
+        id: "schedule-place",
+        number: "03",
+        time: "Placeholder venue",
+        item: "Place",
+        detail: "Placeholder: the address goes here when it is final.",
+      },
     ],
   },
   eventTypes: {
@@ -137,13 +155,14 @@ export const marketing = {
     notePlaceholder: "Placeholder: dietary needs, a song, or a note for the host.",
     statesTitle: "Form states",
     statesIntro:
-      "Placeholder: Submitting, Full, and Closed are driven by the page config. The form above stays in the ready state.",
+      "Placeholder: Submitting, Full, Closed, and Error are driven by the page config. The form above stays in the ready state.",
     choices: [
       { value: "halloween", label: "Halloween", selected: true },
       { value: "run-club", label: "Run club" },
       { value: "tech-meetup", label: "Tech meetup" },
       { value: "nightlife", label: "Nightlife / DJ night" },
       { value: "wedding", label: "Wedding" },
+      { value: "sold-out", label: "Sold out", disabled: true },
     ],
     states: {
       submitting: {
@@ -157,6 +176,14 @@ export const marketing = {
       closed: {
         title: "Closed",
         body: "Placeholder: RSVPs are closed. The form is replaced with this notice.",
+      },
+      error: {
+        title: "Error",
+        body: "Placeholder: check the highlighted fields before this RSVP can send.",
+        fields: {
+          name: "Enter your name.",
+          event: "Pick one option.",
+        },
       },
     },
     fields: {
