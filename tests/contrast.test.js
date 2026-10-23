@@ -268,7 +268,17 @@ test("chips, disclosures, and the RSVP error state use palette tokens", () => {
   assert.match(components, /\.faq-item__trigger:active\s*\{[^}]*var\(--color-bg-muted\)/);
   assert.match(components, /\.schedule-row:has\(\.schedule-row__trigger:hover\)\s*\{[^}]*var\(--color-accent-subtle\)/);
   assert.match(components, /\.schedule-row:has\(\.schedule-row__trigger:active\)\s*\{[^}]*var\(--color-bg-muted\)/);
-  assert.match(components, /\.schedule-row:has\(\[aria-expanded="true"\]\)\s*\{[^}]*var\(--color-accent\)/);
+  assert.match(components, /\.schedule-row:has\(\[aria-expanded="true"\]\)\s*\{[^}]*background:\s*transparent/);
+  assert.match(components, /\.schedule-row:has\(\[aria-expanded="true"\]\)\s*\{[^}]*var\(--color-border-input\)/);
+  assert.match(components, /\.schedule-row__number\s*\{[^}]*var\(--color-text-accent\)/);
+  assert.match(components, /\.schedule-row__time\s*\{[^}]*var\(--color-text-secondary\)/);
+  assert.match(components, /\.schedule-row__panel\s*\{[^}]*var\(--color-text-secondary\)/);
+  assert.doesNotMatch(components, /padding:\s*0 1rem 1rem 4\.75rem/);
+  assert.match(components, /\.choice-chip:has\(:checked\)\s*\{[^}]*border-width:\s*2px/);
+  assert.match(components, /\.choice-chip:has\(:checked\):hover\s*\{[^}]*var\(--color-accent\)/);
+  assert.doesNotMatch(components, /\.choice-chip:has\(:checked\):hover\s*\{[^}]*accent-hover/);
+  assert.match(components, /\.faq-item__trigger:focus-visible\s*\{[^}]*outline-offset:\s*-3px/);
+  assert.match(components, /\.schedule-row__trigger:focus-visible\s*\{[^}]*outline-offset:\s*-3px/);
   assert.match(components, /\.rsvp-state--error\s*\{[^}]*var\(--color-border-error\)/);
   assert.match(components, /\.rsvp-state--error h3,\s*\.rsvp-state--error p\s*\{[^}]*var\(--color-text-error\)/);
 });
