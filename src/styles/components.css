@@ -206,10 +206,9 @@
 
 .schedule-row {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  column-gap: 1rem;
+  grid-template-columns: 1rem auto 1rem minmax(0, 1fr) 1rem auto 1rem;
+  column-gap: 0;
   align-items: center;
-  padding-inline: 1rem;
   background: transparent;
   border: 1px solid var(--color-border-input);
   border-radius: var(--radius-md);
@@ -237,6 +236,11 @@
   background: var(--color-bg-muted);
 }
 
+.schedule-row:has(.schedule-row__trigger:focus-visible) {
+  border-width: 2px;
+  border-color: var(--color-focus-ring);
+}
+
 .schedule-row__heading {
   display: grid;
   grid-template-columns: subgrid;
@@ -259,16 +263,20 @@
 }
 
 .schedule-row__trigger:focus-visible {
-  outline: 2px solid var(--color-focus-ring);
-  outline-offset: -3px;
+  outline: none;
 }
 
 .schedule-row__number {
+  grid-column: 2;
   font-family: var(--font-display);
   font-size: 1.75rem;
   font-weight: var(--font-weight-display);
   line-height: 1;
   color: var(--color-text-accent);
+}
+
+.schedule-row__stack {
+  grid-column: 4;
 }
 
 .schedule-row__time {
@@ -290,6 +298,7 @@
 
 .schedule-row__trigger::after {
   content: "";
+  grid-column: 6;
   justify-self: end;
   width: 0.5rem;
   height: 0.5rem;
@@ -311,7 +320,7 @@
 }
 
 .schedule-row__panel p {
-  grid-column: 2;
+  grid-column: 4;
 }
 
 .schedule-row__panel[hidden] {

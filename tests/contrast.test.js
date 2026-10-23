@@ -278,7 +278,10 @@ test("chips, disclosures, and the RSVP error state use palette tokens", () => {
   assert.match(components, /\.choice-chip:has\(:checked\):hover\s*\{[^}]*var\(--color-accent\)/);
   assert.doesNotMatch(components, /\.choice-chip:has\(:checked\):hover\s*\{[^}]*accent-hover/);
   assert.match(components, /\.faq-item__trigger:focus-visible\s*\{[^}]*outline-offset:\s*-3px/);
-  assert.match(components, /\.schedule-row__trigger:focus-visible\s*\{[^}]*outline-offset:\s*-3px/);
+  assert.match(components, /\.schedule-row:has\(\.schedule-row__trigger:focus-visible\)\s*\{[^}]*border-width:\s*2px/);
+  assert.match(components, /\.schedule-row:has\(\.schedule-row__trigger:focus-visible\)\s*\{[^}]*var\(--color-focus-ring\)/);
+  assert.match(components, /\.schedule-row__trigger:focus-visible\s*\{[^}]*outline:\s*none/);
+  assert.doesNotMatch(components, /\.schedule-row__trigger:focus-visible\s*\{[^}]*outline-offset:\s*-3px/);
   assert.match(components, /\.rsvp-state--error\s*\{[^}]*var\(--color-border-error\)/);
   assert.match(components, /\.rsvp-state--error h3,\s*\.rsvp-state--error p\s*\{[^}]*var\(--color-text-error\)/);
 });
