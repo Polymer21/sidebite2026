@@ -56,6 +56,17 @@ export const marketing = {
       },
     ],
   },
+  schedule: {
+    id: "schedule",
+    eyebrow: "Placeholder copy",
+    title: "Schedule",
+    intro: "Placeholder: the facts row is shared, so the next event can swap the date, time, and place.",
+    rows: [
+      { label: "Date", value: "Saturday, October 31" },
+      { label: "Time", value: "7:00 p.m." },
+      { label: "Place", value: "Placeholder venue" },
+    ],
+  },
   eventTypes: {
     id: "events",
     eyebrow: "Placeholder copy",
@@ -85,20 +96,74 @@ export const marketing = {
       },
     ],
   },
+  faq: {
+    id: "faq",
+    eyebrow: "Placeholder copy",
+    title: "Questions",
+    intro: "Placeholder: each question is a disclosure. It stays closed until someone opens it.",
+    items: [
+      {
+        id: "faq-plus-one",
+        question: "Can I bring a plus-one?",
+        answer: "Placeholder: yes. Set the guest stepper to the number of people in your party.",
+      },
+      {
+        id: "faq-change",
+        question: "Can I change my RSVP?",
+        answer: "Placeholder: this demo stays in the browser, so use the reset control and submit again.",
+      },
+      {
+        id: "faq-closed",
+        question: "What if the event is full?",
+        answer: "Placeholder: the form switches to the Full or Closed state from the page config.",
+      },
+    ],
+  },
   rsvp: {
     id: "rsvp",
     eyebrow: "Placeholder copy",
     title: "RSVP form demo",
     intro:
       "Placeholder: client-side only. Submitting shows a success state on this page and does not contact a server.",
+    state: "ready",
     submitLabel: "RSVP",
     resetLabel: "Submit another response",
     successTitle: "You're on the list.",
-    guestsHint: "Placeholder: a whole number from 1 to 10.",
+    guestsMin: 1,
+    guestsMax: 10,
+    guestsValue: 2,
+    guestsHint: "Placeholder: 1 to 10. Use the buttons or the arrow keys.",
+    eventLabel: "Event type",
+    notePlaceholder: "Placeholder: dietary needs, a song, or a note for the host.",
+    statesTitle: "Form states",
+    statesIntro:
+      "Placeholder: Submitting, Full, and Closed are driven by the page config. The form above stays in the ready state.",
+    choices: [
+      { value: "halloween", label: "Halloween", selected: true },
+      { value: "run-club", label: "Run club" },
+      { value: "tech-meetup", label: "Tech meetup" },
+      { value: "nightlife", label: "Nightlife / DJ night" },
+      { value: "wedding", label: "Wedding" },
+    ],
+    states: {
+      submitting: {
+        title: "Submitting",
+        body: "Placeholder: the RSVP is sending. Fields stay visible and the button waits.",
+      },
+      full: {
+        title: "Full",
+        body: "Placeholder: this event is full. The form is replaced until a seat opens.",
+      },
+      closed: {
+        title: "Closed",
+        body: "Placeholder: RSVPs are closed. The form is replaced with this notice.",
+      },
+    },
     fields: {
       name: "Name",
       email: "Email",
       guests: "Guests",
+      note: "Note",
     },
   },
   footer: {

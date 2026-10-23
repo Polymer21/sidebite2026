@@ -11,12 +11,13 @@ index.html                 Document shell. Copy is injected at build time.
 vite.config.js             Base path /sidebite2026/ and the HTML plugin.
 src/content/marketing.js   Copy, slides, and the default palette.
 src/content/pages.js       Maps an HTML file to a content object.
-src/components/            Nav, header, hero slider, sections, RSVP, footer.
+src/components/            Top bar, hero, schedule, FAQ, RSVP fields, footer.
 src/render/page.js         Composes a page from a content object.
-src/behaviors/             Slider, menu, palette switch, RSVP validation.
-src/logic/                 Slide timing and form rules, covered by tests.
-src/styles/tokens.css      Palettes. The only file with color values.
-src/styles/                Layout, type, hero, and sections.
+src/behaviors/             Slider, menu, palette switch, stepper, FAQ, RSVP.
+src/logic/                 Slide timing, guest stepper, and form rules.
+src/styles/tokens.css      32 Figma Palette colors per mode, plus the focus-ring alias.
+src/styles/themes.css      Font and radius tokens from the Figma Theme collection.
+src/styles/                Layout, type, hero, shared components, and sections.
 public/                    Favicon and other files copied as-is.
 ```
 
@@ -43,19 +44,21 @@ npm run preview
 
 The production preview is [http://127.0.0.1:4173/sidebite2026/](http://127.0.0.1:4173/sidebite2026/). `npm run build` writes `dist/`.
 
-## Palettes
+## Palettes and themes
 
-Set `data-palette` on `<html>` to switch every color. Components only reference role tokens such as `var(--color-bg-page)`, `var(--color-text-primary)`, `var(--color-accent)`, `var(--color-text-on-hero)`, and `var(--color-bg-footer)`.
+Set `data-palette` on `<html>` to switch every color and the type theme together. Components only reference role tokens such as `var(--color-bg-page)`, `var(--color-accent-hover)`, `var(--color-text-error)`, `var(--color-border-focus)`, and `var(--font-display)`.
 
-| Value | Name | Notes |
+`src/styles/tokens.css` matches the Figma Palette collection: 32 color values for each mode, including hover, pressed, disabled, border, error, and focus. `color/focus-ring` is an alias of `color/border/focus` (`--color-focus-ring`).
+
+| Value | Palette | Theme fonts |
 | --- | --- | --- |
-| `a` | TripleTee | Cream `#F3EFE7`, forest `#1A3820`, green `#426849`, olive `#656E4F`, sage `#929578`, oak `#866D4F`, tan `#B0977C`, stone `#D8D1C4`, ink `#222523`, small text `#81694C`. Sage and tan are decorative fills; they are not used for text. |
-| `b` | Default | Neutral gray and charcoal, checked to WCAG AA. |
-| `c` | Premium | Earthy taupe. This is the default, matching the Premium hero reference. |
+| `a` | TripleTee | Halloween: Figtree for display, Nunito Sans for text |
+| `b` | Default | Default: Bricolage Grotesque for display, Inter for text |
+| `c` | Premium | Premium: Fraunces for display, Inter for text. This is the marketing default. |
 
 The default comes from `palette` in `src/content/marketing.js`. The footer switcher sets the same attribute in the browser. Adding `?palette=a` (or `b` or `c`) to the URL does too.
 
-Headings use Figtree. Body text uses Nunito Sans. Both are self-hosted variable fonts.
+Font families and weights live in `src/styles/themes.css`. The files are self-hosted variable fonts. Premium does not use the Halloween families.
 
 ## Hero behavior
 
@@ -64,12 +67,18 @@ Headings use Figtree. Body text uses Nunito Sans. Both are self-hosted variable 
 - Autoplay waits 5 seconds per slide.
 - Autoplay pauses while the pointer is over the hero or focus is inside it, and while the tab is in the background.
 - `prefers-reduced-motion: reduce` turns autoplay off and drops the fade.
-- Controls are three 8px dots at the bottom right. Touch swipes change slides. There are no arrows.
-- Slides are palette colors for now. The scrim stays put so headline contrast does not depend on the photo.
+- Controls are three 8px dots at the bottom right. From 759px wide and below, each dot keeps that 8px mark inside a 44px hit area. Touch swipes change slides. There are no arrows.
+- Slides use palette colors. A band of `--color-bg-hero-start` sits behind the headline so the hero text tokens keep their contrast. The logo and footer links also grow to a 44px target at that width.
+
+## Shared blocks
+
+The page is built from TopBar, PillArrowButton, ScheduleRow, FAQItem, Textarea, ChoiceChip, and GuestCountStepper. The stepper replaces the free-text guest field. It keeps a minimum and maximum from the content config and moves with the arrow keys, Home, and End. FAQ items are buttons with `aria-expanded` and `aria-controls`.
 
 ## RSVP demo
 
-The form checks name, email, and guest count in the browser. Errors are tied to the fields. A valid submit replaces the form with a success message in the same card. Nothing is sent to a server.
+The form checks name, email, event type, an optional note, and guest count in the browser. Errors are tied to the fields. A valid submit passes through Submitting, then replaces the form with a success message in the same card. Nothing is sent to a server.
+
+`rsvp.state` in the content config is `ready`, `submitting`, `full`, or `closed`. Full and Closed replace the form. The marketing page stays on `ready` and also renders Submitting, Full, and Closed from `rsvp.states` so those states can be reviewed on the page.
 
 ## Deploy to GitHub Pages
 
@@ -83,4 +92,4 @@ The site is served at `https://<user>.github.io/sidebite2026/`.
 
 ## Accessibility
 
-The page uses semantic regions, a skip link, visible focus, labeled fields, and text that stays at least 4.5:1 on the page, cards, footer, and hero scrim (including a white photo under the scrim). `npm test` checks those pairs, the TripleTee values, and that component CSS does not contain raw colors.
+The page uses semantic regions, a skip link, visible focus, labeled fields, a guest spinbutton, and disclosures. Text that the layout uses stays at least 4.5:1 on the page, cards, footer, and hero. `npm test` checks the 32 Figma colors, those pairs, the theme fonts, the 44px targets, and that component CSS does not contain raw colors.

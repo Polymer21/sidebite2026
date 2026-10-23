@@ -27,6 +27,22 @@ test("rendered markup includes the shared regions and placeholder copy", () => {
   assert.match(page.body, /id="rsvp-name"/);
   assert.match(page.body, /id="rsvp-email"/);
   assert.match(page.body, /id="rsvp-guests"/);
+  assert.match(page.body, /data-component="top-bar"/);
+  assert.match(page.body, /data-component="pill-arrow"/);
+  assert.match(page.body, /data-component="textarea"/);
+  assert.match(page.body, /data-component="choice-chip"/);
+  assert.match(page.body, /data-component="guest-count-stepper"/);
+  assert.match(page.body, /data-component="schedule-row"/);
+  assert.match(page.body, /data-component="faq-item"/);
+  assert.match(page.body, /role="spinbutton"/);
+  assert.match(page.body, /aria-valuemin="1"/);
+  assert.match(page.body, /aria-valuemax="10"/);
+  assert.match(page.body, /aria-expanded="false"/);
+  assert.match(page.body, /aria-controls="faq-plus-one"/);
+  assert.match(page.body, /data-rsvp-state="ready"/);
+  assert.match(page.body, /data-rsvp-state="submitting"/);
+  assert.match(page.body, /data-rsvp-state="full"/);
+  assert.match(page.body, /data-rsvp-state="closed"/);
   assert.match(page.body, /data-autoplay="5000"/);
   assert.match(page.body, /data-fade="600"/);
   assert.match(page.body, /--hero-fade: 600ms/);
@@ -37,6 +53,17 @@ test("rendered markup includes the shared regions and placeholder copy", () => {
   assert.match(page.body, /data-palette-option="a"/);
   assert.match(page.body, /data-palette-option="b"/);
   assert.match(page.body, /data-palette-option="c"/);
+});
+
+test("full and closed RSVP states replace the form from config", () => {
+  for (const state of ["full", "closed"]) {
+    const content = structuredClone(marketing);
+    content.rsvp.state = state;
+    const page = renderPage(content);
+    assert.match(page.body, new RegExp(`data-rsvp-state="${state}"`));
+    assert.doesNotMatch(page.body, /id="rsvp-name"/);
+    assert.match(page.body, new RegExp(content.rsvp.states[state].title));
+  }
 });
 
 test("content is escaped before it reaches the page", () => {

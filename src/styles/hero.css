@@ -23,9 +23,9 @@
 
 .logo {
   color: var(--color-text-on-hero);
-  font-family: var(--font-heading);
+  font-family: var(--font-display);
   font-size: 1.35rem;
-  font-weight: 600;
+  font-weight: var(--font-weight-display);
   letter-spacing: -0.04em;
   line-height: 1;
   text-decoration: none;
@@ -37,10 +37,10 @@
   min-height: 44px;
   padding: 0 0.95rem;
   border: 1px solid var(--color-text-on-hero);
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   color: var(--color-text-on-hero);
   font-size: 0.95rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .site-nav ul {
@@ -51,8 +51,9 @@
 
 .site-nav a {
   color: var(--color-text-on-hero);
+  font-family: var(--font-facts);
   font-size: 0.95rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-strong);
   text-decoration: none;
 }
 
@@ -69,7 +70,7 @@
 }
 
 .hero :focus-visible {
-  outline-color: var(--color-focus-on-hero);
+  outline-color: var(--color-text-on-hero);
 }
 
 .hero__slides,
@@ -91,15 +92,27 @@
 }
 
 .hero__slide[data-tone="1"] {
-  background: var(--color-bg-hero-slide-1);
+  background: var(--color-bg-hero-start);
 }
 
 .hero__slide[data-tone="2"] {
-  background: var(--color-bg-hero-slide-2);
+  background: var(--color-bg-muted);
 }
 
 .hero__slide[data-tone="3"] {
-  background: var(--color-bg-hero-slide-3);
+  background: var(--color-bg-section);
+}
+
+:root[data-palette="c"] .hero__slide[data-tone="1"] {
+  background: var(--color-accent-pressed);
+}
+
+:root[data-palette="c"] .hero__slide[data-tone="2"] {
+  background: var(--color-accent);
+}
+
+:root[data-palette="c"] .hero__slide[data-tone="3"] {
+  background: var(--color-bg-hero-start);
 }
 
 .hero__slide.is-active {
@@ -121,19 +134,12 @@
 .hero__scrim {
   z-index: 1;
   pointer-events: none;
-  background:
-    linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--color-scrim-base) var(--scrim-deep), transparent) 0%,
-      color-mix(in srgb, var(--color-scrim-base) var(--scrim-cover), transparent) 11%,
-      transparent 18%
-    ),
-    linear-gradient(
-      to top,
-      color-mix(in srgb, var(--color-scrim-base) var(--scrim-deep), transparent) 0%,
-      color-mix(in srgb, var(--color-scrim-base) var(--scrim-cover), transparent) 52%,
-      transparent 66%
-    );
+  background: linear-gradient(
+    to top,
+    var(--color-bg-hero-start) 0%,
+    var(--color-bg-hero-start) 28%,
+    transparent 58%
+  );
 }
 
 .hero__layout {
@@ -163,7 +169,7 @@
   max-width: 11em;
   color: var(--color-text-on-hero);
   font-size: clamp(2.6rem, 5.4vw, 5.15rem);
-  font-weight: 600;
+  font-weight: var(--font-weight-display);
   letter-spacing: -0.045em;
   line-height: 0.96;
 }
@@ -173,6 +179,7 @@
   margin: 1.15rem 0 0;
   color: var(--color-text-secondary-on-hero);
   font-size: 1.125rem;
+  font-weight: var(--font-weight-lead);
   line-height: 1.5;
 }
 
@@ -210,6 +217,47 @@
 }
 
 @media (max-width: 759px) {
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .hero__layout {
+    padding-bottom: 88px;
+  }
+
+  .hero__dots {
+    gap: 0;
+  }
+
+  .hero__dot {
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .hero__dot::before {
+    width: 8px;
+    height: 8px;
+    inset: auto;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1.5px var(--color-text-on-hero);
+    transform: translate(-50%, -50%);
+  }
+
+  .hero__dot[aria-current="true"] {
+    background: transparent;
+  }
+
+  .hero__dot[aria-current="true"]::before {
+    background: var(--color-text-on-hero);
+    box-shadow: none;
+  }
+
   .js .nav-toggle {
     display: inline-flex;
   }
@@ -237,18 +285,7 @@
     display: flex;
     align-items: center;
     min-height: 44px;
-    color: var(--color-text-on-dark-surface);
-  }
-
-  .site-nav:not(.is-open) ul {
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 759px) {
-  .site-nav ul {
-    flex-direction: column;
-    gap: 0.25rem;
+    color: var(--color-text-on-footer);
   }
 
   .site-nav a {

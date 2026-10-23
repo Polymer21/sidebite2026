@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { clampCount, countFromKey } from "../src/logic/stepper.js";
 import { AUTOPLAY_MS, FADE_MS, indexFromKey, swipeDelta, wrapIndex } from "../src/logic/slider.js";
 import { successCopy, validateRsvp } from "../src/logic/validate-rsvp.js";
 
@@ -42,6 +43,21 @@ test("rsvp validation accepts a complete response and rejects empty fields", () 
   assert.ok(empty.errors.name);
   assert.ok(empty.errors.email);
   assert.ok(empty.errors.guests);
+});
+
+test("the guest stepper stays inside min and max and responds to keys", () => {
+  assert.equal(clampCount("2", 1, 10), 2);
+  assert.equal(clampCount("0", 1, 10), 1);
+  assert.equal(clampCount("14", 1, 10), 10);
+  assert.equal(clampCount("nope", 1, 10), null);
+  assert.equal(countFromKey("4", "ArrowUp", 1, 10), 5);
+  assert.equal(countFromKey("4", "ArrowDown", 1, 10), 3);
+  assert.equal(countFromKey("1", "ArrowDown", 1, 10), 1);
+  assert.equal(countFromKey("10", "ArrowUp", 1, 10), 10);
+  assert.equal(countFromKey("4", "Home", 1, 10), 1);
+  assert.equal(countFromKey("4", "End", 1, 10), 10);
+  assert.equal(countFromKey("", "ArrowUp", 1, 10), 1);
+  assert.equal(countFromKey("4", "Enter", 1, 10), null);
 });
 
 test("success copy stays on the device and names the guest", () => {

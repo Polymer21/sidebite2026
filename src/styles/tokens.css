@@ -1,96 +1,119 @@
 /*
-  Role tokens only. Components never use raw hex values.
-  Switch the set with data-palette="a" | "b" | "c" on the root element.
+  Palette collection from Figma file zqsW5P0b2HJth07bUOesLp.
+  Each mode has the 32 color values. color/focus-ring aliases
+  color/border/focus, so it is one shared reference rather than a 33rd hex.
+  Switch modes with data-palette="a" | "b" | "c" on the root element.
 
-  a  TripleTee — cream, forest, and the specified brand colors.
-  b  Default — neutral gray, AA on page, surface, and hero scrim.
-  c  Premium — earthy taupe. This is the marketing page default.
-
-  Sage (#929578) and tan (#B0977C) are decorative fills. They do not
-  clear AA as text on the TripleTee cream, so body copy does not use them.
-  Hero text sits on a scrim of at least --scrim-cover over a white photo.
+  a  TripleTee
+  b  Default
+  c  Premium — marketing page default
 */
 
 :root {
-  --scrim-cover: 78%;
-  --scrim-deep: 86%;
-  --color-shade: #000000;
+  --color-focus-ring: var(--color-border-focus);
 }
 
 :root[data-palette="a"] {
-  --color-bg-page: #f3efe7;
-  --color-bg-surface: #fbf9f4;
-  --color-text-primary: #222523;
-  --color-text-secondary: #81694c;
-  --color-accent: #1a3820;
-  --color-text-on-accent: #f3efe7;
-  --color-border: #866d4f;
+  --color-bg-page: #fcfbfa;
+  --color-bg-section: #f7f6f3;
+  --color-bg-surface: #d8d1c4;
+  --color-bg-input: #fcfbfa;
+  --color-bg-muted: #d8d1c4;
   --color-bg-footer: #1a3820;
-  --color-text-on-dark-surface: #f3efe7;
-  --color-text-secondary-on-dark-surface: #d8d1c4;
-  --color-bg-hero-start: #1a3820;
-  --color-bg-hero-slide-1: #1a3820;
-  --color-bg-hero-slide-2: #426849;
-  --color-bg-hero-slide-3: #d8d1c4;
-  --color-bg-hero-end: #656e4f;
-  --color-text-on-hero: #f7f4ee;
-  --color-text-secondary-on-hero: #e6ddd0;
-  --color-scrim-base: #102017;
-  --color-focus: #1a3820;
-  --color-focus-on-hero: #f7f4ee;
-  --color-text-danger: #7a2e24;
-  --color-fill-soft: #929578;
-  --color-fill-warm: #b0977c;
+  --color-accent: #426849;
+  --color-accent-subtle: #f0f3f0;
+  --color-text-primary: #1a3820;
+  --color-text-secondary: #656e4f;
+  --color-text-on-accent: #fcfbfa;
+  --color-text-accent: #426849;
+  --color-border-default: #656e4f;
+  --color-bg-hero-start: #f0eee9;
+  --color-accent-hover: #2e4933;
+  --color-text-placeholder: #505242;
+  --color-text-error: #b42318;
+  --color-border-input: #656e4f;
+  --color-border-focus: #426849;
+  --color-border-error: #b42318;
+  --color-text-on-footer: #e8e4dd;
+  --color-text-on-footer-accent: #c0c2b1;
+  --color-accent-pressed: #243928;
+  --color-bg-disabled: #f0eee9;
+  --color-text-disabled: #77736c;
+  --color-border-disabled: #d8d1c4;
+  --color-text-secondary-on-surface: #383c2b;
+  --color-text-accent-on-surface: #2e4933;
+  --color-text-on-hero: #1a3820;
+  --color-text-accent-on-hero: #426849;
+  --color-text-secondary-on-hero: #656e4f;
+  --color-text-on-dark-surface: #e8e4dd;
 }
 
 :root[data-palette="b"] {
-  --color-bg-page: #f4f5f4;
-  --color-bg-surface: #fbfcfb;
-  --color-text-primary: #1a1e1c;
-  --color-text-secondary: #3e4944;
-  --color-accent: #24312c;
-  --color-text-on-accent: #f4f5f4;
-  --color-border: #5c6560;
-  --color-bg-footer: #171a19;
-  --color-text-on-dark-surface: #f4f6f5;
-  --color-text-secondary-on-dark-surface: #c5cdc8;
-  --color-bg-hero-start: #171a19;
-  --color-bg-hero-slide-1: #171a19;
-  --color-bg-hero-slide-2: #5e6a64;
-  --color-bg-hero-slide-3: #d5ddd8;
-  --color-bg-hero-end: #6a756f;
-  --color-text-on-hero: #f4f6f5;
-  --color-text-secondary-on-hero: #d5ddd8;
-  --color-scrim-base: #121614;
-  --color-focus: #24312c;
-  --color-focus-on-hero: #f4f6f5;
-  --color-text-danger: #8a2e2a;
-  --color-fill-soft: #8b948f;
-  --color-fill-warm: #b7b1a8;
+  --color-bg-page: #ffffff;
+  --color-bg-section: #f7f7f8;
+  --color-bg-surface: #ffffff;
+  --color-bg-input: #ffffff;
+  --color-bg-muted: #e4e4e7;
+  --color-bg-footer: #18181b;
+  --color-accent: #2563eb;
+  --color-accent-subtle: #dbeafe;
+  --color-text-primary: #18181b;
+  --color-text-secondary: #52525b;
+  --color-text-on-accent: #ffffff;
+  --color-text-accent: #1d4ed8;
+  --color-border-default: #71717a;
+  --color-bg-hero-start: #dbeafe;
+  --color-accent-hover: #1d4ed8;
+  --color-text-placeholder: #52525b;
+  --color-text-error: #dc2626;
+  --color-border-input: #71717a;
+  --color-border-focus: #2563eb;
+  --color-border-error: #dc2626;
+  --color-text-on-footer: #e4e4e7;
+  --color-text-on-footer-accent: #dbeafe;
+  --color-accent-pressed: #1e40af;
+  --color-bg-disabled: #f4f4f5;
+  --color-text-disabled: #6b7280;
+  --color-border-disabled: #e4e4e7;
+  --color-text-secondary-on-surface: #52525b;
+  --color-text-accent-on-surface: #1d4ed8;
+  --color-text-on-hero: #18181b;
+  --color-text-accent-on-hero: #1d4ed8;
+  --color-text-secondary-on-hero: #52525b;
+  --color-text-on-dark-surface: #e4e4e7;
 }
 
 :root[data-palette="c"] {
-  --color-bg-page: #efe6dc;
-  --color-bg-surface: #f7f1ea;
-  --color-text-primary: #2a211c;
-  --color-text-secondary: #5c4638;
-  --color-accent: #5c4032;
-  --color-text-on-accent: #f7f1ea;
-  --color-border: #6e5646;
-  --color-bg-footer: #2a211c;
-  --color-text-on-dark-surface: #f7f1ea;
-  --color-text-secondary-on-dark-surface: #e4d3c4;
-  --color-bg-hero-start: #2a211c;
-  --color-bg-hero-slide-1: #2a211c;
-  --color-bg-hero-slide-2: #8f7564;
-  --color-bg-hero-slide-3: #e7d9cc;
-  --color-bg-hero-end: #6e5848;
-  --color-text-on-hero: #fbf7f2;
-  --color-text-secondary-on-hero: #e7d9cc;
-  --color-scrim-base: #241c17;
-  --color-focus: #5c4032;
-  --color-focus-on-hero: #fbf7f2;
-  --color-text-danger: #8a332c;
-  --color-fill-soft: #a89888;
-  --color-fill-warm: #c4a88e;
+  --color-bg-page: #f4efe6;
+  --color-bg-section: #ece5d8;
+  --color-bg-surface: #fbf8f2;
+  --color-bg-input: #fbf8f2;
+  --color-bg-muted: #e4dccd;
+  --color-bg-footer: #e4dccd;
+  --color-accent: #4f5b43;
+  --color-accent-subtle: #e4e6da;
+  --color-text-primary: #26221d;
+  --color-text-secondary: #5b5246;
+  --color-text-on-accent: #fbf8f2;
+  --color-text-accent: #4f5b43;
+  --color-border-default: #8a7f70;
+  --color-bg-hero-start: #6f6658;
+  --color-accent-hover: #3e4834;
+  --color-text-placeholder: #6e6558;
+  --color-text-error: #9a3324;
+  --color-border-input: #7c7163;
+  --color-border-focus: #4f5b43;
+  --color-border-error: #9a3324;
+  --color-text-on-footer: #26221d;
+  --color-text-on-footer-accent: #4f5b43;
+  --color-accent-pressed: #333b2b;
+  --color-bg-disabled: #e4dccd;
+  --color-text-disabled: #7a7062;
+  --color-border-disabled: #b8ae9f;
+  --color-text-secondary-on-surface: #5b5246;
+  --color-text-accent-on-surface: #4f5b43;
+  --color-text-on-hero: #fbf8f2;
+  --color-text-accent-on-hero: #ffffff;
+  --color-text-secondary-on-hero: #fbf8f2;
+  --color-text-on-dark-surface: #26221d;
 }

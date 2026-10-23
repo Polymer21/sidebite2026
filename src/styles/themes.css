@@ -1,0 +1,56 @@
+/*
+  Theme collection from the same Figma file, bound to the palette switch.
+  a TripleTee uses the Halloween theme.
+  b Default uses the Default theme.
+  c Premium uses the Premium theme.
+  Weights: Light 300, Regular 400, Medium 500, Semi Bold 600, Bold 700.
+*/
+
+:root,
+:root[data-palette="c"] {
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", serif;
+  --font-facts: "Inter", "Segoe UI", sans-serif;
+  --font-body: var(--font-facts);
+  --font-weight-display: 400;
+  --font-weight-body: 400;
+  --font-weight-strong: 500;
+  --font-weight-bold: 600;
+  --font-weight-lead: 400;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+}
+
+:root[data-palette="a"] {
+  --font-display: "Figtree", "Avenir Next", "Segoe UI", sans-serif;
+  --font-facts: "Nunito Sans", "Segoe UI", sans-serif;
+  --font-body: var(--font-facts);
+  --font-weight-display: 500;
+  --font-weight-body: 300;
+  --font-weight-strong: 600;
+  --font-weight-bold: 700;
+  --font-weight-lead: 400;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+}
+
+:root[data-palette="b"] {
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --font-facts: "Inter", "Segoe UI", sans-serif;
+  --font-body: var(--font-facts);
+  --font-weight-display: 700;
+  --font-weight-body: 400;
+  --font-weight-strong: 600;
+  --font-weight-bold: 700;
+  --font-weight-lead: 400;
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
+}

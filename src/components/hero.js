@@ -1,4 +1,5 @@
-import { escapeHtml, safeHref } from "../render/escape.js";
+import { renderPillArrowButton } from "./pill-arrow-button.js";
+import { escapeHtml } from "../render/escape.js";
 
 function renderSlide(slide, index) {
   const informative = Boolean(slide.src && slide.alt);
@@ -38,7 +39,7 @@ export function renderHero(hero) {
         <h1 id="hero-title">${escapeHtml(hero.title)}</h1>
         <p class="lede">${escapeHtml(hero.lede)}</p>
         <p class="hero__cta">
-          <a class="button" href="${safeHref(hero.cta.href)}">${escapeHtml(hero.cta.label)}<span class="button__icon" aria-hidden="true">→</span></a>
+          ${renderPillArrowButton({ href: hero.cta.href, label: hero.cta.label })}
         </p>
       </div>
     </div>
