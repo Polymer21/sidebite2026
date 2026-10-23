@@ -1,0 +1,96 @@
+/*
+  Role tokens only. Components never use raw hex values.
+  Switch the set with data-palette="a" | "b" | "c" on the root element.
+
+  a  TripleTee — cream, forest, and the specified brand colors.
+  b  Default — neutral gray, AA on page, surface, and hero scrim.
+  c  Premium — earthy taupe. This is the marketing page default.
+
+  Sage (#929578) and tan (#B0977C) are decorative fills. They do not
+  clear AA as text on the TripleTee cream, so body copy does not use them.
+  Hero text sits on a scrim of at least --scrim-cover over a white photo.
+*/
+
+:root {
+  --scrim-cover: 78%;
+  --scrim-deep: 86%;
+  --color-shade: #000000;
+}
+
+:root[data-palette="a"] {
+  --color-bg-page: #f3efe7;
+  --color-bg-surface: #fbf9f4;
+  --color-text-primary: #222523;
+  --color-text-secondary: #81694c;
+  --color-accent: #1a3820;
+  --color-text-on-accent: #f3efe7;
+  --color-border: #866d4f;
+  --color-bg-footer: #1a3820;
+  --color-text-on-dark-surface: #f3efe7;
+  --color-text-secondary-on-dark-surface: #d8d1c4;
+  --color-bg-hero-start: #1a3820;
+  --color-bg-hero-slide-1: #1a3820;
+  --color-bg-hero-slide-2: #426849;
+  --color-bg-hero-slide-3: #d8d1c4;
+  --color-bg-hero-end: #656e4f;
+  --color-text-on-hero: #f7f4ee;
+  --color-text-secondary-on-hero: #e6ddd0;
+  --color-scrim-base: #102017;
+  --color-focus: #1a3820;
+  --color-focus-on-hero: #f7f4ee;
+  --color-text-danger: #7a2e24;
+  --color-fill-soft: #929578;
+  --color-fill-warm: #b0977c;
+}
+
+:root[data-palette="b"] {
+  --color-bg-page: #f4f5f4;
+  --color-bg-surface: #fbfcfb;
+  --color-text-primary: #1a1e1c;
+  --color-text-secondary: #3e4944;
+  --color-accent: #24312c;
+  --color-text-on-accent: #f4f5f4;
+  --color-border: #5c6560;
+  --color-bg-footer: #171a19;
+  --color-text-on-dark-surface: #f4f6f5;
+  --color-text-secondary-on-dark-surface: #c5cdc8;
+  --color-bg-hero-start: #171a19;
+  --color-bg-hero-slide-1: #171a19;
+  --color-bg-hero-slide-2: #5e6a64;
+  --color-bg-hero-slide-3: #d5ddd8;
+  --color-bg-hero-end: #6a756f;
+  --color-text-on-hero: #f4f6f5;
+  --color-text-secondary-on-hero: #d5ddd8;
+  --color-scrim-base: #121614;
+  --color-focus: #24312c;
+  --color-focus-on-hero: #f4f6f5;
+  --color-text-danger: #8a2e2a;
+  --color-fill-soft: #8b948f;
+  --color-fill-warm: #b7b1a8;
+}
+
+:root[data-palette="c"] {
+  --color-bg-page: #efe6dc;
+  --color-bg-surface: #f7f1ea;
+  --color-text-primary: #2a211c;
+  --color-text-secondary: #5c4638;
+  --color-accent: #5c4032;
+  --color-text-on-accent: #f7f1ea;
+  --color-border: #6e5646;
+  --color-bg-footer: #2a211c;
+  --color-text-on-dark-surface: #f7f1ea;
+  --color-text-secondary-on-dark-surface: #e4d3c4;
+  --color-bg-hero-start: #2a211c;
+  --color-bg-hero-slide-1: #2a211c;
+  --color-bg-hero-slide-2: #8f7564;
+  --color-bg-hero-slide-3: #e7d9cc;
+  --color-bg-hero-end: #6e5848;
+  --color-text-on-hero: #fbf7f2;
+  --color-text-secondary-on-hero: #e7d9cc;
+  --color-scrim-base: #241c17;
+  --color-focus: #5c4032;
+  --color-focus-on-hero: #fbf7f2;
+  --color-text-danger: #8a332c;
+  --color-fill-soft: #a89888;
+  --color-fill-warm: #c4a88e;
+}
